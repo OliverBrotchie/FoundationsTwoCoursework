@@ -10,20 +10,6 @@ var c = new Interface(document.getElementById('example').firstElementChild,m => 
 	},
 	code: {
 		usage:'tagged'
-	},
-	consoleCommands:{
-		commands:{ 
-			secret: function(){
-				this.removeLast();
-				this.out(new Message({text:"°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø¤º°`°º¤ø,¸",tag:"Console"}));
-			},
-			args: function(x,y,z){
-				this.removeLast();
-				this.out(new Message({text:x,tag:"Console"}));
-				this.out(new Message({text:y,tag:"Console"}));
-				this.out(new Message({text:z,tag:"Console"}));
-			}
-		}
 	}
 });
 
@@ -42,3 +28,4 @@ setTimeout(()=>{
 		},1500);
 	},1500);
 },1500);
+
