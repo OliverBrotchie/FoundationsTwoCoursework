@@ -245,7 +245,67 @@ TuringMachine.prototype.mult = function(){
 		g.addVertex(new Vertex(i));
 	}
 
+	//Keep going right until you reach a blank
+	g.addEdge(0,0,1,1,'r');
+	g.addEdge(0,1,'.','.','r');
+	g.addEdge(1,1,1,1,'r');
 
+	//Turn the blank into a .
+	g.addEdge(1,2,'B','.','l');
+
+	//Go left until you reach a c
+	g.addEdge(2,2,1,1,'l');
+	g.addEdge(2,3,'.','.','r');
+
+	//Skip all Xs
+	g.addEdge(3,3,'X','X','r');
+
+	//.onvert a one on the right side into and X
+	g.addEdge(3,4,1,'X','l');
+
+
+	//Skip all X,Y and Z, moving left
+	g.addEdge(4,4,'X','X','l');
+	g.addEdge(4,5,'.','.','l');
+	g.addEdge(5,5,'Y','Y','l');
+
+	//.onvert a one on the left side into and Y
+	g.addEdge(5,6,1,'Y','r');
+	
+
+	//Skip all X,.,Y and ones, moving right to the end of the tape
+	g.addEdge(6,6,'Y','Y','r');
+	g.addEdge(6,7,'.','.','r');
+	g.addEdge(7,7,1,1,'r');
+	g.addEdge(7,7,'X','X','r');
+	g.addEdge(7,8,'.','.','r');
+	g.addEdge(8,8,1,1,'r');
+
+	//.onvert a blank into a one
+	g.addEdge(8,9,'B',1,'l');
+
+	//Move left until you get back to the left side
+	g.addEdge(9,9,1,1,'l');
+	g.addEdge(9,10,'.','.','l');
+	g.addEdge(10,10,1,1,'l');
+	g.addEdge(10,10,'X','X','l');
+
+	//Go back to state 5
+	g.addEdge(10,5,'.','.','l');
+	
+	//When at state 5 skip blanks moving right
+	g.addEdge(5,11,'B','B','r');
+
+	//.onvert all Ys into ones moving right
+	g.addEdge(11,11,'Y',1,'r');
+	
+
+	//When you reach the ., move to the right and go back to state 3
+	g.addEdge(11,3,'.','.','r');
+
+	//When the multiplication is done, convert . into an = and all the Xs into ones
+	g.addEdge(3,12,'.','=','l');
+	g.addEdge(12,12,'X',1,'l');
 
 	this.states = g;
 	this.run(this.states.getVertex(0));
