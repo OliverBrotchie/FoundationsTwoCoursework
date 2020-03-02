@@ -18,41 +18,45 @@ c.onMessage = (input) =>{
 	var output = [];
 
 	input = input.text;
-	input[1] = input[1].split('');
+	if(input[1] != undefined){
+		
+		input[1] = input[1].split('');
 
-	if(input[1][0] != "B"){
-		input[1].unshift("B");
-	}
+		if(input[1][0] != "B"){
+			input[1].unshift("B");
+		}
 
-	if(input[1][input[1].length-1] != "B"){
-		input[1].push("B");
-	}
+		if(input[1][input[1].length-1] != "B"){
+			input[1].push("B");
+		}
 
-	for(var i = 0; i<input[1].length;i++){
+		for(var i = 0; i<input[1].length;i++){
 
-		if(input[1][i] != ','){
-			if(isNaN(input[1][i])){
-				output.push(input[1][i])
-			} else {
-				output.push(eval(input[1][i]));
+			if(input[1][i] != ','){
+				if(isNaN(input[1][i])){
+					output.push(input[1][i])
+				} else {
+					output.push(eval(input[1][i]));
+				}
 			}
 		}
-	}
 
-	var tape =  new Tape(output);
-	tape.right();
+		var tape =  new Tape(output);
+		tape.right();
 
-	var t = new TuringMachine(tape,null);
+		var t = new TuringMachine(tape,null);
 
-	if(input[0] == "add"){
+		if(input[0] == "add"){
+			
+			t.add();
 		
-		t.add();
-	
-	} else {
-		t.mult();
-	}
+		} else {
+			t.mult();
+		}
 
-	c.out(new Message({text: t.history[t.history.length-1],tag:'Console'}));
+		c.out(new Message({text: t.history[t.history.length-1],tag:'Console'}));
+	}
+	
 }
 
 c.element.inputBox.focus();
