@@ -292,19 +292,3 @@ TuringMachine.prototype.run = function(v) {
 	}
 
 }
-
-Keep going right until you reach a blank
-Turn the blank into a .
-Go left until you reach a c
-Skip all Xs
-Convert a one on the right side into and X
-Skip all X,Y and Z, moving left
-Convert a one on the left side into and Y
-Skip all X,.,Y and ones, moving right to the end of the tape
-Convert a blank into a one
-Move left until you get back to the left side
-Go back to state 5
-When at state 5 skip blanks moving right
-Convert all Ys into ones moving right
-When you reach the ., move to the right and go back to state 3
-When the multiplication is done, convert . into an = and all the Xs into ones
