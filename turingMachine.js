@@ -304,7 +304,7 @@ TuringMachine.prototype.mult = function(){
 	this.run(this.states.getVertex(0));
 }
 
-
+//Recursive running function
 TuringMachine.prototype.run = function(v) {
 
 	//Store the current tape
@@ -338,6 +338,7 @@ TuringMachine.prototype.run = function(v) {
 				break;
 			}
 
+			//Recursivly runs the program
 			this.run(v.edges[i].to);
 			break;
 		}

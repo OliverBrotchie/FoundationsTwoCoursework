@@ -52,6 +52,6 @@ c.out(new Message({text:"Welcome to Turing.js!",tag:"Console"}));
 setTimeout(()=>{
 	c.out(new Message({text:"Please enter the transition function type (add or mult), followed by the desired input including blanks on the ends.",tag:"Console"}));
 	setTimeout(()=>{
-		c.out(new Message({text:"For example: mult B,1,1,C,1,1,1,1,B would multiply 2x4",tag:"Console"}));
+		c.out(new Message({text:"For example: mult B11C1111B would multiply 2x4",tag:"Console"}));
 	},1500);
 },1500);
