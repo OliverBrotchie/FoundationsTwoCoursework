@@ -20,6 +20,14 @@ c.onMessage = (input) =>{
 	input = input.text;
 	input[1] = input[1].split('');
 
+	if(input[1][0] != "B"){
+		input[1].unshift("B");
+	}
+
+	if(input[1][input[1].length-1] != "B"){
+		input[1].push("B");
+	}
+
 	for(var i = 0; i<input[1].length;i++){
 
 		if(input[1][i] != ','){
@@ -50,8 +58,8 @@ c.onMessage = (input) =>{
 c.element.inputBox.focus();
 c.out(new Message({text:"Welcome to Turing.js!",tag:"Console"}));
 setTimeout(()=>{
-	c.out(new Message({text:"Please enter the transition function type (add or mult), followed by the desired input including blanks on the ends.",tag:"Console"}));
+	c.out(new Message({text:"Please enter the transition function type (add or mult), followed by the desired input.",tag:"Console"}));
 	setTimeout(()=>{
-		c.out(new Message({text:"For example: mult B11C1111B would multiply 2x4",tag:"Console"}));
+		c.out(new Message({text:"For example: mult B11.1111B would multiply 2x4",tag:"Console"}));
 	},1500);
 },1500);
