@@ -1,5 +1,5 @@
-var c = new Interface(document.getElementById('example').firstElementChild,m => {},{
-
+//Code for interacting with the user interface
+var c = new Interface(document.getElementById('example').firstElementChild,()=>{},{
 	messageOptions: {
 		tags:{
 			tagStyles:{
@@ -9,23 +9,49 @@ var c = new Interface(document.getElementById('example').firstElementChild,m => 
 		}
 	},
 	code: {
-		usage:'tagged'
+		usage:false
 	}
 });
 
-c.element.inputBox.focus();
+c.onMessage = (input) =>{
 
-c.out(new Message({text:"Welcome to Interface.js!",tag:"Console"}));
+	var output = [];
+
+	input = input.text;
+	input[1] = input[1].split('');
+
+	for(var i = 0; i<input[1].length;i++){
+
+		if(input[1][i] != ','){
+			if(isNaN(input[1][i])){
+				output.push(input[1][i])
+			} else {
+				output.push(eval(input[1][i]));
+			}
+		}
+	}
+
+	var tape =  new Tape(output);
+	tape.right();
+
+	var t = new TuringMachine(tape,null);
+
+	if(input[0] == "add"){
+		
+		t.add();
+	
+	} else {
+		t.mult();
+	}
+
+	c.out(new Message({text: t.history[t.history.length-1],tag:'Console'}));
+}
+
+c.element.inputBox.focus();
+c.out(new Message({text:"Welcome to Turing.js!",tag:"Console"}));
 setTimeout(()=>{
-	c.out(new Message({text:"you can use code with << your code >>",tag:"Console"}))
+	c.out(new Message({text:"Please enter the transition function type (add or mult), followed by the desired input including blanks on the ends.",tag:"Console"}));
 	setTimeout(()=>{
-		c.out(new Message({text:"or you can use console commands with //yourCommand",tag:"Console"}))
-		setTimeout(()=>{
-			c.out(new Message({text:"To get more info, see: https://github.com/OliverBrotchie/Interface.js",tag:"Console"}))
-			setTimeout(()=>{
-				c.out(new Message({text:"Tip - You can clear the console with: //clearHistory",tag:"Console"}));
-			},3000)
-		},1500);
+		c.out(new Message({text:"For example: mult B,1,1,C,1,1,1,1,B would multiply 2x4",tag:"Console"}));
 	},1500);
 },1500);
-
